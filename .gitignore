@@ -1,8 +1,8 @@
 .env
 .env.*
 **/.env
-.bob/
-**/.bob/
+.bob/mcp.json
+**/.bob/mcp.json
 .venv/
 __pycache__/
 *.pyc

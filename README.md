@@ -14,6 +14,8 @@ Python [MCP (Model Context Protocol)](https://modelcontextprotocol.io) servers t
 │   └── requirements.txt
 ├── snowflake_mcp/
 │   └── snowflake_server.py  Basic Snowflake server with CRUD tools (stdio)
+├── .bob/skills/data-mapping-agent/
+│   └── SKILL.md             Bob skill: generates SQL from source-to-target mappings
 └── log/python_testing.py    Scratch file
 ```
 
@@ -36,6 +38,18 @@ Query-accepting tools only allow a single `SELECT` statement.
 Runs over stdio. Tools: `test_connection`, `list_tables`, `read_data` (single `SELECT` only), `create_record`, `update_record`, `delete_record`.
 
 > **Warning:** `create_record`, `update_record` and `delete_record` modify data. Use a role with the minimum required privileges.
+
+### 3. `data-mapping-agent`: Bob skill for source-to-target mapping SQL
+
+Located at [`.bob/skills/data-mapping-agent/SKILL.md`](.bob/skills/data-mapping-agent/SKILL.md). It is a Bob skill (an AI agent), not an MCP server. It reads source-to-target mapping requirements and generates SQL for each transformation in Oracle (the default), Snowflake or MySQL.
+
+- Processes each target column or transformation separately and never merges them.
+- Doesn't guess source columns or tables. It asks you when information is missing.
+- Generates only `SELECT` or `INSERT...SELECT`, and doesn't execute the SQL.
+- Writes the result to an Excel workbook named `<file name>SQL_generated.xlsx`.
+
+Use it by asking Bob to generate SQL from a mapping document, or run `/data-mapping-agent`. Start a new Bob task after cloning so the skill is picked up.
+
 
 ## Setup
 
